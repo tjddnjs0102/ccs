@@ -1,5 +1,4 @@
 package org.ccs.app.core;
 
-public class Points {
-
+public enum Group {
 }

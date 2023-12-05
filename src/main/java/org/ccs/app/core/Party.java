@@ -1,2 +1,4 @@
-package org.ccs.app.core;public class Party {
+package org.ccs.app.core;
+
+public class Party {
 }
