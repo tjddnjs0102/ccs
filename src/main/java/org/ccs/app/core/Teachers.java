@@ -1,8 +1,16 @@
 package org.ccs.app.core;
 
+import lombok.Data;
+
+@Data
 public class Teachers {
-    String name;
-    Integer age;
-    String group; // 객체, enum
-    String phoneNumber; // 객체
+    private String name;
+    private Integer age;
+    private String zone;
+
+    public Teachers(String name, Integer age, String zone) {
+        this.name = name;
+        this.age = age;
+        this.zone = zone;
+    }
 }
