@@ -1,4 +1,5 @@
 package org.ccs.app.core;
 
-public class Party { // 분반
+// 분반
+public class Party {
 }
