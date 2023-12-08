@@ -6,16 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(HealthRestController.class)
@@ -24,9 +22,6 @@ class HealthRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private HealthRestController healthRestController;
 
     @Test
     public void testCheckHealth() throws Exception {
@@ -41,6 +36,7 @@ class HealthRestControllerTest {
         mockMvc.perform(get("/_health")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(jsonContent));
+                .andExpect(content().string(jsonContent))
+                .andDo(print());
     }
 }

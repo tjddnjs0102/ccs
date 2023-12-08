@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class RestControllerAdvisor {
-    private final Logger LOG = LoggerFactory.getLogger(RestControllerAdvisor.class);
+public class BaseRestControllerAdvisor {
+    private final Logger LOG = LoggerFactory.getLogger(BaseRestControllerAdvisor.class);
 
     @ExceptionHandler(Exception.class)
     public ContentBody<String> handleException(Exception e) {
