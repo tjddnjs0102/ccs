@@ -1,6 +1,5 @@
 package temporary.controller;
 
-import org.ccs.app.core.Students;
 import org.springframework.web.bind.annotation.*;
 import temporary.dto.StudentDTO;
 
