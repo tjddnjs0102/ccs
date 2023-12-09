@@ -18,6 +18,7 @@ public class User {
     private Gender gender;
     private Address address;
     private String phoneNumber;
+    private String profileImage;
 
     private Boolean state;
     private String reason;

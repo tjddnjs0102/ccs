@@ -23,7 +23,7 @@ public class AcademicScheduleRestController implements BaseRestController {
     private final AcademicScheduleService academicScheduleService;
 
     @PostMapping("/api/v1/academics/schedules")
-    public ContentBody<List<LocalDate>> createAcademicSchedules(
+    public ContentBody<List<LocalDate>> generateAcademicSchedules(
             @RequestBody CreateAcademicScheduleRequest request,
             BindingResult bindingResult) {
 

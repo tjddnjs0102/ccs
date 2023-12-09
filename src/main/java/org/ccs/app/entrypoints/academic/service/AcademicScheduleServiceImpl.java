@@ -15,6 +15,6 @@ public class AcademicScheduleServiceImpl implements AcademicScheduleService {
 
     @Override
     public List<LocalDate> generateAcademiSchedules(CreateAcademicScheduleRequest request) {
-        return generateAcademicScheduleUsecase.generate(request.getTargetDate());
+        return generateAcademicScheduleUsecase.generate(request.targetDate());
     }
 }
