@@ -1,6 +1,11 @@
 package org.ccs.app.core.academic.application.usecase;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public interface GenerateAcademicScheduleUsecase {
 
-    void generate(Integer targetYear);
+
+    List<LocalDate> generate(Integer targetYear);
+
 }

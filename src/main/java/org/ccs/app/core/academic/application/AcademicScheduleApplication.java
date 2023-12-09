@@ -14,27 +14,21 @@ import java.util.List;
 public class AcademicScheduleApplication implements GenerateAcademicScheduleUsecase {
     private final Logger log = LoggerFactory.getLogger(AcademicScheduleApplication.class);
 
-    // 일요일 목록을 저장할 리스트
-    private List<LocalDate> sundayDates = new ArrayList<>();
-
     @Override
-    public void generate(Integer targetYear) {
-        // 기존의 일요일 목록을 초기화
-        sundayDates.clear();
+    public List<LocalDate>  generate(Integer targetYear) {
+        LocalDate start = LocalDate.of(targetYear, 1, 1);
+        LocalDate end = LocalDate.of(targetYear, 12, 31);
 
-        // 주어진 연도의 시작일과 종료일 설정
-        LocalDate startDate = LocalDate.of(targetYear, 1, 1);
-        LocalDate endDate = LocalDate.of(targetYear, 12, 31);
-
-        // 시작일부터 종료일까지 반복하면서 일요일인 경우 리스트에 추가
-        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
-            if (startDate.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                sundayDates.add(startDate);
+        List<LocalDate> schedules = new ArrayList<>();
+        while (start.isBefore(end) || start.isEqual(end)) {
+            if (start.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                schedules.add(start);
             }
-            startDate = startDate.plusDays(1);
+            start = start.plusDays(1);
         }
 
-        // 생성된 일요일 목록 반환
-        // return sundayDates;
+        // TODO : repository 연결 후 저장하는 로직을 구현하세요.
+
+        return schedules;
     }
 }

@@ -1,7 +1,7 @@
 package org.ccs.app.entrypoints.user.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.ccs.app.entrypoints.share.controllers.BaseRestController;
+import org.ccs.app.entrypoints.share.entrypoints.controller.BaseRestController;
 import org.ccs.app.entrypoints.user.model.CreateUserRequest;
 import org.ccs.app.entrypoints.user.service.UserService;
 import org.slf4j.Logger;

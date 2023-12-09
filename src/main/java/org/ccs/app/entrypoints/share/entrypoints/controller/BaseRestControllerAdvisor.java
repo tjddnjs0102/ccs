@@ -1,6 +1,6 @@
-package org.ccs.app.entrypoints.share.controllers;
+package org.ccs.app.entrypoints.share.entrypoints.controller;
 
-import org.ccs.app.entrypoints.share.model.ContentBody;
+import org.ccs.app.entrypoints.share.entrypoints.model.ContentBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

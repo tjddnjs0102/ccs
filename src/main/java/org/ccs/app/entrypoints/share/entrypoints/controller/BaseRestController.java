@@ -1,10 +1,8 @@
-package org.ccs.app.entrypoints.share.controllers;
+package org.ccs.app.entrypoints.share.entrypoints.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
-
-import java.time.LocalDate;
 
 /**
  * Rest Controller 구현용

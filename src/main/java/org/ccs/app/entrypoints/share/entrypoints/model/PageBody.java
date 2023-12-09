@@ -1,4 +1,4 @@
-package org.ccs.app.entrypoints.share.model;
+package org.ccs.app.entrypoints.share.entrypoints.model;
 
 import lombok.Getter;
 import lombok.ToString;
