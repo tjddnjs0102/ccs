@@ -1,14 +1,29 @@
 package org.ccs.app.core.user.domain;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 
-// Lombok에 @Data는 사용을 지향합니다.
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "css_user")
+@DynamicInsert
+@DynamicUpdate
 @Getter @ToString
 public class User {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private UserType type;
     private String name;
@@ -16,7 +31,8 @@ public class User {
     private Integer cellGroup; //구역
     private FellowShipGroup fellowShipGroup; // 회별
     private Gender gender;
-    private Address address;
+    private String zipcode;
+    private String address;
     private String phoneNumber;
     private String profileImage;
 
