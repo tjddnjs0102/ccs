@@ -31,7 +31,7 @@ public class User {
     private Integer cellGroup; //구역
     private FellowShipGroup fellowShipGroup; // 회별
     private Gender gender;
-    private String zipcode;
+    private String zipcode; // 우편
     private String address;
     private String phoneNumber;
     private String profileImage;

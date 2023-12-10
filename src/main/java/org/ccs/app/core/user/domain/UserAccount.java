@@ -5,8 +5,8 @@ import java.util.List;
 
 public class UserAccount {
     private Long id;
-    private String email;
-    private String password;
+    private String email; // login id
+    private String password; //
     private List<UserRole> roles;
     private Integer loginFailureCount;
     private AccountStatus status;
