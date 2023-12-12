@@ -1,5 +1,8 @@
 package org.ccs.app.core;
 
+import lombok.Getter;
+
+@Getter
 public enum ChurchGroup {
     ELEMENTARY_SCHOOL("유초등부"),
     MIDDLE_HIGH_SCHOOL("중고등부"),
@@ -14,7 +17,4 @@ public enum ChurchGroup {
         this.koreanName = koreanName;
     }
 
-    public String getKoreanName() {
-        return koreanName;
-    }
 }
