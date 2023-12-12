@@ -17,7 +17,7 @@ public class HealthRestController {
         LOG.info("[health] check.");
         final Map<String, String> responseBody = new HashMap<>();
         responseBody.put("result", "success");
-        responseBody.put("service", "css-service");
+        responseBody.put("service", "ccs-service");
         return responseBody;
     }
 }

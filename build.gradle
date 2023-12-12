@@ -22,16 +22,21 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.hibernate:hibernate-core'
     implementation 'org.springframework.boot:spring-boot-starter-logging:3.1.0'
 
-    compileOnly 'org.projectlombok:lombok'
+    // Persistence
+    implementation 'org.hibernate:hibernate-core:6.3.1.Final'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
