@@ -1,5 +1,7 @@
 package org.ccs.app.core.academic.domain;
 
+import jakarta.persistence.Embedded;
+import org.ccs.app.config.Audit;
 import org.ccs.app.core.studunt.domain.Student;
 
 import java.time.LocalDateTime;
@@ -15,5 +17,7 @@ public class PerformanceCard {
 //            @AttributeOverride(name = "address", column = @Column(name = "sns_address")),
 //    })
     private PerformancePoints points;
-    private LocalDateTime createdAt;
+
+    @Embedded
+    private Audit audit;
 }

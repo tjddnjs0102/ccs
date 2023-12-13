@@ -1,13 +1,11 @@
 package org.ccs.app.core.user.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.ccs.app.config.Audit;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -25,6 +23,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private UserType type;
     private String name;
     private Integer parish; // 교구
@@ -39,7 +38,7 @@ public class User {
     private Boolean state;
     private String reason;
 
-    // fixme : Audit으로 분리할 것
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    @Embedded
+    private Audit audit;
+
 }

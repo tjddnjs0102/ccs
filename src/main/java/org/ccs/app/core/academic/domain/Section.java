@@ -1,5 +1,7 @@
 package org.ccs.app.core.academic.domain;
 
+import jakarta.persistence.Embedded;
+import org.ccs.app.config.Audit;
 import org.ccs.app.core.studunt.domain.Student;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,6 @@ public class Section {
     private List<Teacher> teachers;
     private List<Student> students;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    @Embedded
+    private Audit audit;
 }

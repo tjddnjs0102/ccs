@@ -2,7 +2,7 @@ package org.ccs.app.core.academic.application;
 
 import org.ccs.app.core.academic.application.usecase.GenerateAcademicScheduleUsecase;
 import org.ccs.app.core.academic.domain.AcademicSchedule;
-import org.ccs.app.core.academic.domain.AcademicScheduleRepository;
+import org.ccs.app.core.user.infra.repository.AcademicScheduleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
             academicSchedule.setYear(targetYear);
             academicSchedule.setClosed(false);
             academicSchedule.setReason("휴교 사유");
-            academicSchedule.setUpdatedAt(LocalDateTime.now());
+            academicSchedule.getAudit().setUpdatedAt(LocalDateTime.now());
 
             try {
                 academicSchedule = scheduleRepository.save(academicSchedule);
