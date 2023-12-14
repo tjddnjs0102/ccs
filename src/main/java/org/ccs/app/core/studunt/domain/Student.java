@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.ccs.app.config.Audit;
+import org.ccs.app.core.academic.domain.Section;
 import org.ccs.app.core.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -25,4 +26,8 @@ public class Student {
 
     @Embedded
     private Audit audit;
+
+    @ManyToOne
+    @JoinColumn(name = "ccs_section_id")
+    private Section section;
 }

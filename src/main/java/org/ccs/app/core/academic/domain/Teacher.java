@@ -28,4 +28,8 @@ public class Teacher {
 
     @Embedded
     private Audit audit;
+
+    @ManyToOne
+    @JoinColumn(name = "ccs_section_id")
+    private Section section;
 }
