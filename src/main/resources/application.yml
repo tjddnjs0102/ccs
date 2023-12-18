@@ -12,3 +12,6 @@ spring:
 logging:
   config: classpath:logback/logback.xml
 
+jwt:
+  secret: ${JWT_KEY}
+  expiration: 604800000 #일주일, 만료시간
