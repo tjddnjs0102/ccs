@@ -15,7 +15,7 @@
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="today.creame" level="debug" additivity="false">
+    <logger name="org.ccs" level="debug" additivity="false">
         <appender-ref ref="CONSOLE" />
     </logger>
 

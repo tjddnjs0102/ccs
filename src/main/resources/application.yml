@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/datajpa
-    username: sa
-    password:
+    url: jdbc:mysql://pre035.chh5jixw7uel.ap-northeast-2.rds.amazonaws.com:3306/pre35db
+    username: master
+    password: abcd1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
       hibernate:
