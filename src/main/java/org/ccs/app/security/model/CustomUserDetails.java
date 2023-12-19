@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor // 모든 필드를 포함하는 생성자 생성
 public class CustomUserDetails implements UserDetails {
-    private String username;
+    private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
     private AccountStatus accountStatus; // 사용자의 계정 상태를 나타내는 필드
@@ -39,7 +39,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

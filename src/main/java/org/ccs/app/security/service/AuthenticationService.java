@@ -1,6 +1,26 @@
 package org.ccs.app.security.service;
 
-//  사용자 인증을 처리하고, JWT를 발급
-// 사용자의 자격 증명을 확인하고, 올바른 경우 JwtProvider를 사용하여 JWT를 생성
+import org.ccs.app.security.jwt.JwtProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Service;
+
+@Service
 public class AuthenticationService {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtProvider jwtProvider;
+
+    public String authenticate(String email, String password) throws AuthenticationException {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+
+        return jwtProvider.generateToken(authentication);
+    }
 }
