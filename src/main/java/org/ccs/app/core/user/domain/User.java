@@ -17,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "css_user")
+@Table(name = "ccs_user")
 @DynamicInsert
 @DynamicUpdate
 @Getter @ToString
