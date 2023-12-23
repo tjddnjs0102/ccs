@@ -5,7 +5,7 @@ import jakarta.persistence.Converter;
 import org.ccs.app.core.user.domain.UserType;
 
 @Converter
-public class UserTypeConverter implements AttributeConverter<UserType, String> {
+public class UserTypeToStringConverter implements AttributeConverter<UserType, String> {
 
     @Override
     public String convertToDatabaseColumn(UserType attribute) {
