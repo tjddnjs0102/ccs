@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.ccs.app.core.user.domain.converter.FellowShipGroupToStringConverter;
+import org.ccs.app.core.user.domain.converter.UserTypeToStringConverter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,6 +26,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @Convert(converter = UserTypeToStringConverter.class)
     @Column(name = "type")
     private UserType type;
 
@@ -36,6 +39,7 @@ public class User {
     @Column(name = "cell_group")
     private Integer cellGroup; //구역
 
+    @Convert(converter = FellowShipGroupToStringConverter.class)
     @Column(name = "fellowship_group")
     private FellowShipGroup fellowShipGroup; // 회별
 
