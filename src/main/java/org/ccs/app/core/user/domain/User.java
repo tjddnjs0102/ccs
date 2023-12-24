@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.ccs.app.core.user.domain.converter.FellowShipGroupToStringConverter;
+import org.ccs.app.core.user.domain.converter.GenderToStringConverter;
 import org.ccs.app.core.user.domain.converter.UserTypeToStringConverter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -43,6 +44,7 @@ public class User {
     @Column(name = "fellowship_group")
     private FellowShipGroup fellowShipGroup; // 회별
 
+    @Convert(converter = GenderToStringConverter.class)
     @Column(name = "gender")
     private Gender gender;
 
