@@ -1,9 +1,9 @@
-package org.ccs.app.entrypoints.share.entrypoints;
+package org.ccs.app.entrypoints.share.controller;
 
 
 import lombok.Getter;
 import lombok.ToString;
-import org.ccs.app.entrypoints.share.entrypoints.model.ContentBody;
+import org.ccs.app.entrypoints.share.model.ContentBody;
 
 @Getter
 @ToString
