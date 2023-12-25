@@ -21,7 +21,7 @@ public class AcademicSchedule {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "year")
+    @Column(name = "academic_year")
     private Integer year;
 
     @Column(name = "closed")
@@ -33,6 +33,6 @@ public class AcademicSchedule {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }

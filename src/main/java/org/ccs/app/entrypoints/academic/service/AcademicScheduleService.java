@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AcademicScheduleService {
 
-    List<LocalDate> generateAcademiSchedules(CreateAcademicScheduleRequest request);
+    List<LocalDate> generateAcademicSchedules(CreateAcademicScheduleRequest request);
 }
