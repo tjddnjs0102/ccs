@@ -28,7 +28,7 @@ public class AcademicScheduleRestController implements BaseRestController {
             BindingResult bindingResult) {
 
         hasError(bindingResult);
-        List<LocalDate> results = academicScheduleService.generateAcademiSchedules(request);
+        List<LocalDate> results = academicScheduleService.generateAcademicSchedules(request);
         log.debug("results: {}");
 
         return ResponseFactory.success(results);
