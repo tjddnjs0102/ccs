@@ -13,6 +13,19 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
+cloud:
+  aws:
+    credentials:
+      profile: ccs.service
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+    s3:
+     bucket-name: temp-ccs-files
+     pre-signed:
+       expiration: 60
 
 logging:
   config: classpath:logback/logback.xml

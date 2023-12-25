@@ -1,8 +1,30 @@
 # 테스트 환경에 필요한 추가적인 설정들을 여기에 작성합니다.
-
 spring:
   config:
     activate:
       on-profile: test
 
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update  # | update | none | create | create-drop // TODO: 공부할 것
+
+cloud:
+  aws:
+    credentials:
+      profile: ccs.service
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+    s3:
+      bucket-name: temp-ccs-files
+      pre-signed:
+        expiration: 60
 
