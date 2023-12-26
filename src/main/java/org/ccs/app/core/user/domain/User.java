@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
 import org.ccs.app.core.user.domain.converter.FellowShipGroupToStringConverter;
+import org.ccs.app.core.user.domain.converter.GenderToStringConverter;
 import org.ccs.app.core.user.domain.converter.UserTypeToStringConverter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,7 +22,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @DynamicInsert
 @DynamicUpdate
 @Getter @ToString
-public class User {
+public class User extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
@@ -43,6 +45,7 @@ public class User {
     @Column(name = "fellowship_group")
     private FellowShipGroup fellowShipGroup; // 회별
 
+    @Convert(converter = GenderToStringConverter.class)
     @Column(name = "gender")
     private Gender gender;
 
@@ -64,12 +67,5 @@ public class User {
 
     @Column(name = "reason")
     private String reason;
-
-    // fixme : Audit으로 분리할 것
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }
 
