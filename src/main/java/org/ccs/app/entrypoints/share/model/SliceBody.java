@@ -1,4 +1,4 @@
-package org.ccs.app.entrypoints.share.entrypoints.model;
+package org.ccs.app.entrypoints.share.model;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -6,7 +6,7 @@ import lombok.ToString;
 @Getter @ToString
 public class SliceBody<T> extends ContentBody<T> {
 
-    private Boolean next;
+    private final Boolean next;
 
     public SliceBody(int code, String message, String traceId, T contents, Boolean next) {
         super(code, message, traceId, contents);
