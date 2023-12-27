@@ -1,6 +1,8 @@
 package org.ccs.app.core.academic.application;
 
 import org.ccs.app.core.academic.application.usecase.GenerateAcademicScheduleUsecase;
+import org.ccs.app.core.academic.domain.AcademicSchedule;
+import org.ccs.app.core.academic.infra.repository.AcademicScheduleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,11 @@ import java.util.List;
 @Component
 public class AcademicScheduleApplication implements GenerateAcademicScheduleUsecase {
     private final Logger log = LoggerFactory.getLogger(AcademicScheduleApplication.class);
+    private final AcademicScheduleRepository academicScheduleRepository;
+
+    public AcademicScheduleApplication(AcademicScheduleRepository academicScheduleRepository) {
+        this.academicScheduleRepository = academicScheduleRepository;
+    }
 
     @Override
     public List<LocalDate>  generate(Integer targetYear) {
@@ -23,6 +30,12 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
         while (start.isBefore(end) || start.isEqual(end)) {
             if (start.getDayOfWeek() == DayOfWeek.SUNDAY) {
                 schedules.add(start);
+
+                AcademicSchedule schedule = AcademicSchedule.builder()
+                        .year(targetYear)
+                        .build();
+
+                academicScheduleRepository.save(schedule);
             }
             start = start.plusDays(1);
         }
