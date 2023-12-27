@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    view:
+      suffix: .html
   datasource:
     url: jdbc:mysql://pre035.chh5jixw7uel.ap-northeast-2.rds.amazonaws.com:3306/pre35db
     username: master
