@@ -10,7 +10,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "menu")
+@Table(name = "ccs_menu")
 @DynamicInsert
 @DynamicUpdate
 @Getter

@@ -35,7 +35,7 @@ public class MenuApplication implements MenuItemGetUsecase, MenuRootCreateUsecas
                 .orElse(0);
         Menu menu = parameter.toEntity();
         menu.changeItemOrder(itemOrders);
-
+        menuRepository.save(menu);
         return menu;
     }
 
