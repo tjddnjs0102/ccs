@@ -31,6 +31,9 @@ public class Menu extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "target")
+    private String target;
+
     @Column(name = "depth")
     private Integer depth;
 

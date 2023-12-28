@@ -10,13 +10,18 @@ import java.util.Objects;
 @Getter @ToString
 public class RootMenuCreateParameter implements EntityBuildable<Menu> {
     private String name;
+    private String target;
 
-    public RootMenuCreateParameter(String name) {
+    public RootMenuCreateParameter(String name, String target) {
         this.name = Objects.requireNonNull(name);
+        this.target = target;
     }
 
     @Override
     public Menu toEntity() {
-        return Menu.builder().name(name).build();
+        return Menu.builder()
+                .target(target)
+                .name(name)
+                .build();
     }
 }
