@@ -6,9 +6,11 @@ import org.ccs.app.core.academic.infra.repository.AcademicScheduleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
     }
 
     @Override
+    @Transactional
     public List<LocalDate>  generate(Integer targetYear) {
         LocalDate start = LocalDate.of(targetYear, 1, 1);
         LocalDate end = LocalDate.of(targetYear, 12, 31);
@@ -33,14 +36,16 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
 
                 AcademicSchedule schedule = AcademicSchedule.builder()
                         .year(targetYear)
+                        .closed(false)
+                        .reason(null)
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
                         .build();
 
                 academicScheduleRepository.save(schedule);
             }
             start = start.plusDays(1);
         }
-
-        // TODO : repository 연결 후 저장하는 로직을 구현하세요.
 
         return schedules;
     }
