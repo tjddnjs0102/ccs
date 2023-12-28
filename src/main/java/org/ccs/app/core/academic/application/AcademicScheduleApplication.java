@@ -1,5 +1,6 @@
 package org.ccs.app.core.academic.application;
 
+import lombok.RequiredArgsConstructor;
 import org.ccs.app.core.academic.application.usecase.GenerateAcademicScheduleUsecase;
 import org.ccs.app.core.academic.domain.AcademicSchedule;
 import org.ccs.app.core.academic.infra.repository.AcademicScheduleRepository;
@@ -15,13 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class AcademicScheduleApplication implements GenerateAcademicScheduleUsecase {
     private final Logger log = LoggerFactory.getLogger(AcademicScheduleApplication.class);
     private final AcademicScheduleRepository academicScheduleRepository;
 
-    public AcademicScheduleApplication(AcademicScheduleRepository academicScheduleRepository) {
-        this.academicScheduleRepository = academicScheduleRepository;
-    }
 
     @Override
     @Transactional
