@@ -27,7 +27,7 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "password")
     private String password; // login pw
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany
     private List<UserRole> roles;
 
     @Column(name = "login_failure_count")
