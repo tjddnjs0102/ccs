@@ -26,10 +26,13 @@ public class UserRole extends BaseCreatedAndUpdatedDateTime {
     @Convert(converter = RoleToStringConverter.class)
     private Role role;
 
+    @ManyToOne
+    @JoinColumn(name = "ccs_user_account_id")
+    private UserAccount account;
     @Column(name = "ccs_user_account_id")
     private Long userAccountId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ccs_user_account_id")
-//    private UserAccount account;
+   @ManyToOne
+   @JoinColumn(name = "ccs_user_account_id")
+   private UserAccount account;
 }

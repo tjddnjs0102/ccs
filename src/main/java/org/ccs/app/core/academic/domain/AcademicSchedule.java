@@ -1,8 +1,7 @@
 package org.ccs.app.core.academic.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -14,8 +13,10 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "ccs_academic_schedule")
 @DynamicInsert
 @DynamicUpdate
-@Getter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter @ToString
+@Builder
 public class AcademicSchedule {
     @Id
     @GeneratedValue(strategy = IDENTITY)
