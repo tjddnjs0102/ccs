@@ -31,8 +31,4 @@ public class UserRole extends BaseCreatedAndUpdatedDateTime {
     private UserAccount account;
     @Column(name = "ccs_user_account_id")
     private Long userAccountId;
-
-   @ManyToOne
-   @JoinColumn(name = "ccs_user_account_id")
-   private UserAccount account;
 }
