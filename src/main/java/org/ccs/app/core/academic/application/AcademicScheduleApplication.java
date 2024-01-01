@@ -37,8 +37,6 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
                         .year(targetYear)
                         .closed(false)
                         .reason(null)
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
                         .build();
 
                 academicScheduleRepository.save(schedule);

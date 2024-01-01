@@ -2,6 +2,7 @@ package org.ccs.app.core.academic.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,7 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @Getter @ToString
 @Builder
-public class AcademicSchedule {
+public class AcademicSchedule extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -31,9 +32,5 @@ public class AcademicSchedule {
     @Column(name = "reason")
     private String reason; // 왜 휴교했냐? 사유
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    // TODO: 수업일자 정보 추가하기 (작성자: tjddnjs0102)
 }
