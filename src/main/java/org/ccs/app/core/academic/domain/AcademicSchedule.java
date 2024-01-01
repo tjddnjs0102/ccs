@@ -6,6 +6,7 @@ import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -32,5 +33,7 @@ public class AcademicSchedule extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "reason")
     private String reason; // 왜 휴교했냐? 사유
 
-    // TODO: 수업일자 정보 추가하기 (작성자: tjddnjs0102)
+    @Column(name = "schedule_date")
+    private LocalDate scheduleDate; // 수업일자
+
 }

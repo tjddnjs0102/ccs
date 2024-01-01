@@ -37,6 +37,7 @@ public class AcademicScheduleApplication implements GenerateAcademicScheduleUsec
                         .year(targetYear)
                         .closed(false)
                         .reason(null)
+                        .scheduleDate(start)
                         .build();
 
                 academicScheduleRepository.save(schedule);
