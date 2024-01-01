@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
       hibernate:
-        ddl-auto: none  # | update | none | create | create-drop // TODO: 공부할 것
+        ddl-auto: none
       properties:
         hibernate:
           format_sql: true
