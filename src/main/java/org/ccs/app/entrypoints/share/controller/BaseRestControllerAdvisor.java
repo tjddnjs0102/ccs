@@ -23,7 +23,7 @@ public class BaseRestControllerAdvisor {
 
     @ExceptionHandler(Exception.class)
     public ContentBody handleException(Exception e) {
-        LOG.error("Error가 발생하였습니다.");
+        LOG.error("Error가 발생하였습니다. {}", e);
         return new ContentBody(500, "Unknown error.", "", null);
     }
 }

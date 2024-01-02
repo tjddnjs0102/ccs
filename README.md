@@ -15,6 +15,10 @@
 ## Environment Setup
 <hr>
 
+### 개발환경 실행
+
+- gradle clean build -x test 
+
 ## Database Configuration
 <hr>
 
