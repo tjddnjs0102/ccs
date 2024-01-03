@@ -13,7 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "performance_card")
+@Table(name = "ccs_performance_card")
 @DynamicInsert @DynamicUpdate
 @NoArgsConstructor @AllArgsConstructor
 @Getter @ToString
@@ -27,9 +27,13 @@ public class PerformanceCard extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "date")
     private String date; // yyyyMMdd
 
-    @ManyToOne
-    @JoinColumn(name = "ccs_student_id") // 아직 student 테이블 없음
-    private Student student;
+//    @ManyToOne
+//    @JoinColumn(name = "ccs_student_id")
+//    private Student student;
+
+//    아직 student 테이블이 없기 때문에 임시 필드 사용하기
+    @Column(name = "ccs_student_id")
+    private Long studentId;
 
     @Embedded
     @AttributeOverrides({
