@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseCreatedAndUpdatedDateTime {
 
-    @Column(name = "created_dt")
+    @Column(name = "created_at")
     @Getter
     protected LocalDateTime createdDateTime;
 
-    @Column(name = "updated_dt")
+    @Column(name = "updated_at")
     @Getter
     protected LocalDateTime updatedDateTime;
 }
