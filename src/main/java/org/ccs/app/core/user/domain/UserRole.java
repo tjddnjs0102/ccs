@@ -15,7 +15,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "ccs_user_role")
 @DynamicInsert
 @DynamicUpdate
-@Getter @ToString
+@Getter
+@ToString
 public class UserRole extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,4 @@ public class UserRole extends BaseCreatedAndUpdatedDateTime {
     @ManyToOne
     @JoinColumn(name = "ccs_user_account_id")
     private UserAccount account;
-  
-    @Column(name = "ccs_user_account_id")
-    private Long userAccountId;
 }

@@ -20,7 +20,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter @ToString
 @Builder
 public class AcademicSchedule extends BaseCreatedAndUpdatedDateTime {
-public class AcademicSchedule {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
