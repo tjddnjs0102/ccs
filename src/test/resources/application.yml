@@ -12,7 +12,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update  # | update | none | create | create-drop // TODO: 공부할 것
+      ddl-auto: update
 
 cloud:
   aws:
