@@ -1,5 +1,6 @@
 package org.ccs.app.entrypoints.login.controller;
 
+import org.ccs.app.core.common.utils.ValidationUtils;
 import org.ccs.app.core.security.JwtTokenProvider;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
@@ -25,7 +26,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         try {
-            validateLoginRequest(loginRequest);
+            validateLoginRequest(loginRequest); // 로그인 요청 처리 전, 유효성 검사 수행
 
             // 요청 본문에서 로그인 정보를 받아 UserAccount 객체 조회
             UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
@@ -47,6 +48,17 @@ public class LoginController {
     }
 
     private void validateLoginRequest(LoginRequest loginRequest) {
-        // TODO: 입력 값 검증 로직 입력 (이메일 형식, 비밀번호 길이 등)
+        if (loginRequest.getEmail() == null || loginRequest.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Email is required");
+        }
+
+        if (!ValidationUtils.isValidEmail(loginRequest.getEmail())) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        if (loginRequest.getPassword() == null || loginRequest.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Password is required");
+        }
+
     }
 }
