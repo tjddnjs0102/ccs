@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 // TODO : DB 연결 후 수정
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>, UserCustomRepository {
+public interface UserRepository extends JpaRepository<UserAccount, Long>, UserCustomRepository {
     UserAccount findByEmail(String email);
 }
