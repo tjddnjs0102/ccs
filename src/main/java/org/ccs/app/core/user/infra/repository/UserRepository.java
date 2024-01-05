@@ -1,6 +1,7 @@
 package org.ccs.app.core.user.infra.repository;
 
 import org.ccs.app.core.user.domain.User;
+import org.ccs.app.core.user.domain.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 // TODO : DB 연결 후 수정
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>, UserCustomRepository
-{
-
+public interface UserRepository extends JpaRepository<User, Long>, UserCustomRepository {
+    UserAccount findByEmail(String email);
 }
