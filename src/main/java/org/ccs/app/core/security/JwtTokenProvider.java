@@ -2,11 +2,13 @@ package org.ccs.app.core.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Getter
 @Component
 public class JwtTokenProvider {
 
