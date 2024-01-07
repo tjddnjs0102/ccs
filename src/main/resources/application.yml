@@ -14,6 +14,9 @@ spring:
           format_sql: true
   jackson:
     property-naming-strategy: SNAKE_CASE
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: 3600000
 
 cloud:
   aws:
@@ -31,7 +34,3 @@ cloud:
 
 logging:
   config: classpath:logback/logback.xml
-
-jwt:
-  secret: ${JWT_SECRET}
-  expiration-ms: 3600000  # 만료 1시간
