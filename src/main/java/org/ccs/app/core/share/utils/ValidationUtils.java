@@ -1,4 +1,4 @@
-package org.ccs.app.core.common.utils;
+package org.ccs.app.core.share.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

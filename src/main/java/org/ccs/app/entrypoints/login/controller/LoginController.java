@@ -1,6 +1,6 @@
 package org.ccs.app.entrypoints.login.controller;
 
-import org.ccs.app.core.common.utils.ValidationUtils;
+import org.ccs.app.core.share.utils.ValidationUtils;
 import org.ccs.app.core.security.JwtTokenProvider;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
@@ -8,7 +8,6 @@ import org.ccs.app.entrypoints.login.model.JwtAuthenticationResponse;
 import org.ccs.app.entrypoints.login.model.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
