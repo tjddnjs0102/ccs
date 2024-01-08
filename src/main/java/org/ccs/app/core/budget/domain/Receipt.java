@@ -30,7 +30,8 @@ public class Receipt extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
-    private String requester;
+    @Column(name = "requester")
+    private Long requester;
 
     @AttributeOverrides({
             @AttributeOverride(name = "code", column = @Column(name = "back_code")),
