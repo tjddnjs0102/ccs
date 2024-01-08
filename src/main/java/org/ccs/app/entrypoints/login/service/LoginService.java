@@ -1,5 +1,6 @@
 package org.ccs.app.entrypoints.login.service;
 
+import lombok.RequiredArgsConstructor;
 import org.ccs.app.core.security.JwtTokenProvider;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
@@ -8,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor // final 필드에 대한 생성자 자동으로 생성
 public class LoginService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider tokenProvider;
 
     public String authenticate(LoginRequest loginRequest) {
         // 이메일을 기반으로 사용자 계정 조회
