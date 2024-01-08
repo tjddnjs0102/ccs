@@ -1,7 +1,6 @@
 package org.ccs.app.entrypoints.login.service;
 
 import org.ccs.app.core.security.JwtTokenProvider;
-import org.ccs.app.core.share.utils.ValidationUtils;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
 import org.ccs.app.entrypoints.login.model.LoginRequest;
