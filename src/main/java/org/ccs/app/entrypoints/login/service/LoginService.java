@@ -18,16 +18,15 @@ public class LoginService {
     private JwtTokenProvider tokenProvider;
 
     public String authenticate(LoginRequest loginRequest) {
-        // 사용자 로그인 요청 유효성 검사
-        validateLoginRequest(loginRequest);
-
-        // 이메일 기반으로 사용자 계정 조회
+        // 이메일을 기반으로 사용자 계정 조회
         UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
 
-        // 사용자 계정이 존재하는가? 비밀번호가 일치하는가?
+        // 사용자 계정이 존재하고 비밀번호가 일치하는지 확인
         if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
+            // JWT 토큰 생성 및 반환
             return tokenProvider.generateToken(userAccount.getId());
-        } else { // 계정 정보가 잘못된 경우 예외처리
+        } else {
+            // 잘못된 이메일 또는 비밀번호에 대한 예외 처리
             throw new IllegalArgumentException("Invalid email or password");
         }
     }
