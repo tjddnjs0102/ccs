@@ -19,6 +19,10 @@
 
 - gradle clean build -x test 
 
+### 웹페이지 접근 
+
+- 브라우저에서 localhost:8080/ 으로 접속이 가능합니다. 
+
 ## Database Configuration
 <hr>
 
