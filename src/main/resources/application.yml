@@ -15,10 +15,6 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
-  jwt:
-    secret: ${JWT_SECRET}
-    expiration-ms: 3600000
-
   messages:
     basename: messages
 
@@ -32,9 +28,13 @@ cloud:
     stack:
       auto: false
     s3:
-     bucket-name: temp-ccs-files
-     pre-signed:
-       expiration: 60
+      bucket-name: temp-ccs-files
+      pre-signed:
+        expiration: 60
 
 logging:
   config: classpath:logback/logback.xml
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: 3600000
