@@ -9,12 +9,12 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @Getter @Setter
-public class LoginRequest {
+public class LoginRequest { // 다국어 적용
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+    @NotBlank(message = "{email.required}")
+    @Email(message = "{invalid.email}")
     private String email;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "{password.required}")
     private String password;
 }
