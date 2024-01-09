@@ -15,6 +15,9 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
+  messages:
+    basename: messages
+
 cloud:
   aws:
     credentials:
@@ -25,13 +28,13 @@ cloud:
     stack:
       auto: false
     s3:
-     bucket-name: temp-ccs-files
-     pre-signed:
-       expiration: 60
+      bucket-name: temp-ccs-files
+      pre-signed:
+        expiration: 60
 
 logging:
   config: classpath:logback/logback.xml
 
 jwt:
   secret: ${JWT_SECRET}
-  expiration-ms: 3600000  # 만료 1시간
+  expiration-ms: 3600000
