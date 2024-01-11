@@ -20,7 +20,10 @@ public class LoginController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             String jwt = loginService.authenticate(loginRequest);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+            JwtAuthenticationResponse response = JwtAuthenticationResponse.builder()
+                    .accessToken(jwt)
+                    .build();
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
