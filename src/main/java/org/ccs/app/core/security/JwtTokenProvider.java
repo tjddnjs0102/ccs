@@ -67,4 +67,25 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
+    public String generateAccessTokenUsingRefreshToken(String refreshToken) {
+        // 리프레시 토큰에서 Claims 추출
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(refreshToken)
+                .getBody();
+
+        Long userId = Long.parseLong(claims.getSubject());
+        return generateToken(userId);
+    }
+
+    public String generateNewRefreshToken(String refreshToken) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(refreshToken)
+                .getBody();
+
+        Long userId = Long.parseLong(claims.getSubject());
+        return generateRefreshToken(userId);
+    }
 }

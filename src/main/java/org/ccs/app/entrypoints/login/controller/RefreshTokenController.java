@@ -32,25 +32,17 @@ public class RefreshTokenController {
         // 리프레시 토큰 유효성 검사 로직 구현
         String refreshToken = refreshTokenRequest.getRefreshToken();
 
-        // 리프레시 토큰의 유효성을 검사합니다.
+        // 리프레시 토큰 유효성 검사
         if (!refreshTokenService.isRefreshTokenValid(refreshToken)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid refresh token");
         }
 
-        // 유효한 리프레시 토큰인 경우, 새로운 액세스 토큰 및 리프레시 토큰을 발급합니다.
-        String newAccessToken = generateAccessToken(refreshToken);
-        String newRefreshToken = generateRefreshToken();
+        // 새로운 액세스 토큰 생성
+        String newAccessToken = tokenProvider.generateAccessTokenUsingRefreshToken(refreshToken);
+
+        // 새로운 리프레시 토큰 생성
+        String newRefreshToken = tokenProvider.generateNewRefreshToken(refreshToken);
+
         return ResponseEntity.ok(new TokenResponse(newAccessToken, newRefreshToken));
-    }
-
-
-    private String generateAccessToken(String refreshToken) {
-        // 리프레시 토큰을 사용하여 새로운 액세스 토큰을 생성하는 로직 구현
-        // 생성된 액세스 토큰 반환
-    }
-
-    private String generateRefreshToken() {
-        // 새로운 리프레시 토큰을 생성하는 로직 구현
-        // 생성된 리프레시 토큰 반환
     }
 }
