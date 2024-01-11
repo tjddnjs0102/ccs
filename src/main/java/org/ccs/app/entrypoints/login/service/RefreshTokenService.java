@@ -6,7 +6,10 @@ import org.ccs.app.core.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -37,7 +40,20 @@ public class RefreshTokenService {
     }
 
     private String encryptToken(String token) {
-        // 리프레시 토큰을 암호화하는 로직 구현
-        // 암호화된 토큰 반환
+        try {
+            // MessageDigest 인스턴스를 생성
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            // 전달받은 토큰 문자열을 바이트 배열로 변환하고, SHA-256 알고리즘으로 해싱
+            byte[] hash = digest.digest(token.getBytes());
+
+            // 해시된 데이터를 Base64 문자열로 인코딩
+            // Base64 인코딩은 바이트 데이터를 문자열 형태로 변환하는 데 사용
+            // 변환된 문자열은 데이터베이스에 저장하기 적합
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            // SHA-256 알고리즘이 사용이 불가능한 경우 예외가 발생합니다.
+            throw new RuntimeException("Failed to encrypt token", e);
+        }
     }
 }
