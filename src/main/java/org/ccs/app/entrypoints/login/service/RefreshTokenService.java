@@ -1,5 +1,6 @@
 package org.ccs.app.entrypoints.login.service;
 
+import org.ccs.app.core.security.JwtTokenProvider;
 import org.ccs.app.core.security.domain.RefreshToken;
 import org.ccs.app.core.security.infra.RefreshTokenRepository;
 import org.ccs.app.core.user.domain.User;
@@ -18,6 +19,9 @@ public class RefreshTokenService {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+
     public void saveRefreshToken(User user, RefreshToken refreshToken) {
         // 리프레시 토큰을 암호화하여 저장하는 로직 구현
         String encryptedToken = encryptToken(refreshToken.getToken());
@@ -26,11 +30,14 @@ public class RefreshTokenService {
     }
 
     public boolean isRefreshTokenValid(String token) {
-        // 암호화된 토큰으로 데이터베이스에서 조회
+        // 먼저 JWT의 형식적 유효성 검증
+        if (!tokenProvider.validateRefreshToken(token)) {
+            return false;
+        }
+
+        // 데이터베이스에서 토큰 확인
         String encryptedToken = encryptToken(token);
         Optional<RefreshToken> refreshToken = refreshTokenRepository.findByToken(encryptedToken);
-
-        // 리프레시 토큰이 존재하고, 만료되지 않았는지 확인
         return refreshToken.isPresent() && !isTokenExpired(refreshToken.get());
     }
 
