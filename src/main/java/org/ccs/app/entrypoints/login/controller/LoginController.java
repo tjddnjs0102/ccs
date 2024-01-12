@@ -17,14 +17,8 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        try {
-            JwtAuthenticationResponse response = loginService.authenticateAndCreateTokens(loginRequest);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("An error occurred");
-        }
+    public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        JwtAuthenticationResponse response = loginService.authenticateAndCreateTokens(loginRequest);
+        return ResponseEntity.ok(response);
     }
 }
