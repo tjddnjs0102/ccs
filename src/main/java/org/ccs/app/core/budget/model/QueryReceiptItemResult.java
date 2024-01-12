@@ -1,9 +1,14 @@
 package org.ccs.app.core.budget.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.ccs.app.core.budget.domain.ReceiptItem;
 
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@Getter @ToString
 public class QueryReceiptItemResult {
 
     private Long receiptItemId;

@@ -20,10 +20,11 @@ public class ReceiptCustomRepositoryImpl implements ReceiptCustomRepository {
 
     @Override
     public List<QueryReceiptResult> search() {
-        return queryDsl.select(Projections.constructor(QueryReceiptResult.class, receipt, user, receiptItem))
+        return queryDsl.select(Projections.constructor(QueryReceiptResult.class, receipt, user))
                 .from(receipt)
                 .join(user).on(receipt.requester.eq(user.id))
                 .join(receiptItem).on(receipt.eq(receiptItem.receipt))
+                .distinct()
                 .fetch();
     }
 }

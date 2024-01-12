@@ -1,21 +1,21 @@
 package org.ccs.app.core.budget.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ccs_receipt_item")
 @DynamicInsert
 @DynamicUpdate
 @Getter
 @ToString(exclude = {"receipt"}) // 이런 부분 신경을 안 쓰면 무한루프에 빠집니다.
-@NoArgsConstructor
+@Builder
 public class ReceiptItem {
 
     @Id
@@ -34,9 +34,13 @@ public class ReceiptItem {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "attched_goods_image")
+    @Column(name = "attached_goods_image")
     private String attachedGoodsImage;
 
     @Column(name = "goods_weblink")
     private String goodsWebLink;
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
+    }
 }
