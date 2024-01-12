@@ -19,9 +19,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
-            String jwt = loginService.authenticate(loginRequest);
-            String refreshToken = loginService.createRefreshToken(loginRequest); // 리프레시 토큰 생성
-            return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, refreshToken));
+            JwtAuthenticationResponse response = loginService.authenticateAndCreateTokens(loginRequest);
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

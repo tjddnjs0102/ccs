@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.ccs.app.core.security.JwtTokenProvider;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
+import org.ccs.app.entrypoints.login.model.JwtAuthenticationResponse;
 import org.ccs.app.entrypoints.login.model.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,19 @@ public class LoginService {
         } else {
             // 계정이 없는 경우 예외 처리
             throw new IllegalArgumentException("User not found with email: " + loginRequest.getEmail());
+        }
+    }
+
+    public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
+        UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
+
+        if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
+            String jwt = tokenProvider.generateToken(userAccount.getId());
+            String refreshToken = tokenProvider.generateRefreshToken(userAccount.getId());
+
+            return new JwtAuthenticationResponse(jwt, refreshToken);
+        } else {
+            throw new IllegalArgumentException("Invalid email or password");
         }
     }
 }
