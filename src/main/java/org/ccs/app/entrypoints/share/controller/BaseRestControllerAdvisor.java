@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
-// TODO: Logging 추가
 
 @RestControllerAdvice
 public class BaseRestControllerAdvisor {
@@ -18,6 +17,7 @@ public class BaseRestControllerAdvisor {
 
     @ExceptionHandler(InvalidRequestParameterException.class)
     public ContentBody<List<ErrorBindings>> handle(InvalidRequestParameterException e) {
+        LOG.warn("Invalid request parameters: {}", e);
         return new ContentBody<>(400, "Bad request.", "", e.getErrors());
     }
 
