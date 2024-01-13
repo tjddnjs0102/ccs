@@ -2,9 +2,7 @@ package org.ccs.app.core.user.domain;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
 import org.ccs.app.core.user.domain.converter.FellowShipGroupToStringConverter;
 import org.ccs.app.core.user.domain.converter.GenderToStringConverter;
@@ -12,16 +10,16 @@ import org.ccs.app.core.user.domain.converter.UserTypeToStringConverter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.LocalDateTime;
-
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ccs_user")
 @DynamicInsert
 @DynamicUpdate
 @Getter @ToString
+@Builder
 public class User extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = IDENTITY)
