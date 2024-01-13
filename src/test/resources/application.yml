@@ -27,4 +27,3 @@ cloud:
       bucket-name: temp-ccs-files
       pre-signed:
         expiration: 60
-
