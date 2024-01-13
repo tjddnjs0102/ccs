@@ -1,10 +1,12 @@
 spring:
+  config:
+    import: aws-parameterstore:/config/ccs/
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://pre035.chh5jixw7uel.ap-northeast-2.rds.amazonaws.com:3306/pre35db
-    username: master
-    password: abcd1234
+    url: ${db.url}
+    username: ${db.user}
+    password: ${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
       hibernate:
@@ -31,11 +33,16 @@ cloud:
       bucket-name: temp-ccs-files
       pre-signed:
         expiration: 60
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: .
 
 logging:
   config: classpath:logback/logback.xml
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${jwt.secret}
   expiration-ms: 3600000 # 1시간
   refresh-expiration-ms: 604800000 # 7일
