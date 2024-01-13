@@ -1,18 +1,18 @@
 package org.ccs.app.entrypoints.login.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class JwtAuthenticationResponse {
     private String accessToken;
+    private String refreshToken;
     private String tokenType = "Bearer";
-    private Long expiresIn; // 토큰 만료 시간을 나타내는 필드
+    private Long expiresIn;
 
-    public JwtAuthenticationResponse(String accessToken) {
+    public JwtAuthenticationResponse(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 }
