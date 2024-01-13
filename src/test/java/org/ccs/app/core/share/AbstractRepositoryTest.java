@@ -10,5 +10,5 @@ import org.springframework.test.context.ActiveProfiles;
 public abstract class AbstractRepositoryTest {
 
     @Autowired
-    private TestEntityManager entityManager;
+    protected TestEntityManager em;
 }
