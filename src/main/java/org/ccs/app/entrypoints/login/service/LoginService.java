@@ -16,9 +16,13 @@ public class LoginService {
     private final UserRepository userRepository;
     private final JwtTokenProvider tokenProvider;
 
+    private UserAccount findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public String authenticate(LoginRequest loginRequest) {
         // 이메일을 기반으로 사용자 계정 조회
-        UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
+        UserAccount userAccount = findUserByEmail(loginRequest.getEmail());
 
         // 사용자 계정이 존재하고 비밀번호가 일치하는지 확인
         if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
@@ -33,7 +37,7 @@ public class LoginService {
     // 리프레시 토큰 생성 메서드
     public String createRefreshToken(LoginRequest loginRequest) {
         // 이메일을 기반으로 사용자 계정 조회
-        UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
+        UserAccount userAccount = findUserByEmail(loginRequest.getEmail());
 
         // 사용자 계정이 있는 경우 리프레시 토큰 생성 및 반환
         if (userAccount != null) {
@@ -45,7 +49,7 @@ public class LoginService {
     }
 
     public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
-        UserAccount userAccount = userRepository.findByEmail(loginRequest.getEmail());
+        UserAccount userAccount = findUserByEmail(loginRequest.getEmail());
 
         if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
             String jwt = tokenProvider.generateToken(userAccount.getId());
