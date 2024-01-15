@@ -15,10 +15,10 @@ public class JwtTokenProvider {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @Value("${jwt.expiration-ms}")
+    @Value("${jwt.token.access.expiration-ms}")
     private int jwtExpirationInMs;
 
-    @Value("${jwt.refresh-expiration-ms}")
+    @Value("${jwt.token.refresh.expiration-ms}")
     private int refreshExpirationInMs;
 
     // 사용자 ID를 기반으로 JWT 토큰을 생성
