@@ -5,29 +5,58 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+
 public class ApiValidationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // API 경로가 '/api/**' 일 때만 검증을 수행
-        if (request.getRequestURI().equals("/api/**")) {
-            // 여기에 API 검증 로직 추가
-            boolean isValidRequest = performApiValidation(request);
+        String path = request.getRequestURI();
 
-            if (!isValidRequest) {
-                // 유효하지 않은 요청인 경우
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid API Request");
-                return false; // 요청 처리 중단
-            }
+        // API 경로가 '/public/'로 시작하면 누구나 접근 가능
+        if (path.startsWith("/public/")) {
+            return true;
         }
 
-        return true; // 유효성 검증이 성공하면 요청 계속 진행
+        // API 경로가 '/api/'로 시작하면 토큰 필요
+        if (path.startsWith("/api/")) {
+            String token = extractTokenFromRequest(request);
+            if (token == null) {
+                sendErrorResponse(response, "Token is required for /api");
+                return false;
+            }
+            // TODO:토큰이 유효한지 확인하는 로직 추가
+            // ...
+
+            return true;
+        }
+
+        // API 경로가 '/admin/'로 시작하면 토큰 및 권한 필요
+        if (path.startsWith("/admin/")) {
+            String token = extractTokenFromRequest(request);
+            if (token == null) {
+                sendErrorResponse(response, "Token is required for /admin");
+                return false;
+            }
+            // TODO:토큰이 유효하고, 관리자 권한을 가지고 있는지 확인하는 로직 추가
+            // ...
+
+            return true;
+        }
+
+        // 다른 경우는 허용하지 않음
+        sendErrorResponse(response, "Invalid API path");
+        return false;
     }
 
-    private boolean performApiValidation(HttpServletRequest request) {
-        // 여기에 실제 API 검증 로직을 구현
-        // 필요에 따라 특정 조건을 확인하고 유효성 검사 결과를 반환
-        return true;
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        // TODO:토큰 추출 로직
+        // ...
+        return null; // 토큰이 없는 경우
+    }
+
+    private void sendErrorResponse(HttpServletResponse response, String errorMessage) throws IOException {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, errorMessage);
     }
 
     @Override
