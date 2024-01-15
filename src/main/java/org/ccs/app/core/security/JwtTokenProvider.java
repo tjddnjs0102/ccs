@@ -21,18 +21,17 @@ public class JwtTokenProvider {
     @Value("${jwt.token.refresh.expiration-ms}")
     private int refreshExpirationInMs;
 
-    // 사용자 ID를 기반으로 JWT 토큰을 생성
+
     private String generateTokenBase(Long userId, int expirationInMs) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationInMs);
 
-        // JWT 토큰을 생성
         return Jwts.builder()
-                .setSubject(Long.toString(userId)) // 토큰 subject를 사용자 ID로 설정
+                .setSubject(Long.toString(userId))
                 .setIssuedAt(now)
-                .setExpiration(expiryDate) // 만료시간 1시간
-                .signWith(SignatureAlgorithm.HS512, jwtSecret) // 토큰 서명
-                .compact(); // JWT 토큰을 문자열로 압축하여 반환
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
     }
 
     public String generateToken(Long userId) {

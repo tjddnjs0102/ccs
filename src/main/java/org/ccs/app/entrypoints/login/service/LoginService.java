@@ -21,29 +21,22 @@ public class LoginService {
     }
 
     public String authenticate(LoginRequest loginRequest) {
-        // 이메일을 기반으로 사용자 계정 조회
         UserAccount userAccount = findUserByEmail(loginRequest.getEmail());
 
-        // 사용자 계정이 존재하고 비밀번호가 일치하는지 확인
         if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
-            // JWT 토큰 생성 및 반환
             return tokenProvider.generateToken(userAccount.getId());
         } else {
-            // 잘못된 이메일 또는 비밀번호에 대한 예외 처리
             throw new IllegalArgumentException("Invalid email or password");
         }
     }
 
     // 리프레시 토큰 생성 메서드
     public String createRefreshToken(LoginRequest loginRequest) {
-        // 이메일을 기반으로 사용자 계정 조회
         UserAccount userAccount = findUserByEmail(loginRequest.getEmail());
 
-        // 사용자 계정이 있는 경우 리프레시 토큰 생성 및 반환
         if (userAccount != null) {
             return tokenProvider.generateRefreshToken(userAccount.getId());
         } else {
-            // 계정이 없는 경우 예외 처리
             throw new IllegalArgumentException("User not found with email: " + loginRequest.getEmail());
         }
     }
