@@ -1,7 +1,7 @@
 package org.ccs.app.core.common.exception;
 
-import org.ccs.app.core.share.domain.ErrorCode;
 import org.ccs.app.core.share.exception.BusinessException;
+import org.ccs.app.core.share.exception.ErrorCode;
 
 public class NotFoundMenuItemException extends BusinessException {
 

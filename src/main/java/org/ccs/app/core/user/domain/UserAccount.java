@@ -1,18 +1,21 @@
 package org.ccs.app.core.user.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
+import org.ccs.app.core.share.exception.auth.PasswordNotMatchException;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "ccs_user_account")
-@NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
 @Getter @ToString
@@ -41,4 +44,18 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
 
     @Column(name = "password_changed_dt")
     private LocalDateTime passwordChangedAt;
+
+    public void confirmPassword(String password) {
+        if (!Objects.equals(this.password, password)) {
+            // login failure
+            loginFailureCount = loginFailureCount + 1;
+            if (loginFailureCount > 5) {
+                this.status = AccountStatus.LOCKED;
+            }
+            throw new PasswordNotMatchException();
+        }
+
+        this.lastAccessAt = LocalDateTime.now();
+        this.loginFailureCount = 0;
+    }
 }
