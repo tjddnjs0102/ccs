@@ -22,9 +22,9 @@ public class JwtTokenProvider {
     private int refreshExpirationInMs;
 
     // 사용자 ID를 기반으로 JWT 토큰을 생성
-    public String generateToken(Long userId) {
+    private String generateTokenBase(Long userId, int expirationInMs) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+        Date expiryDate = new Date(now.getTime() + expirationInMs);
 
         // JWT 토큰을 생성
         return Jwts.builder()
@@ -35,15 +35,11 @@ public class JwtTokenProvider {
                 .compact(); // JWT 토큰을 문자열로 압축하여 반환
     }
 
-    public String generateRefreshToken(Long userId) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + refreshExpirationInMs);
+    public String generateToken(Long userId) {
+        return generateTokenBase(userId, jwtExpirationInMs);
+    }
 
-        return Jwts.builder()
-                .setSubject(Long.toString(userId))
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+    public String generateRefreshToken(Long userId) {
+        return generateTokenBase(userId, refreshExpirationInMs);
     }
 }
