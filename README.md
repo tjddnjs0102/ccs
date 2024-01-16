@@ -35,6 +35,14 @@
 ## Code Convention
 <hr>
 
+## 메소드
+
+### 네이밍 룰
+
+- 조회시 get과 find의 차이 
+  - get의 경우 반드시 있어야 한다.
+  - find의 경우 있을 수도 있고 없을 수도 있는 경우 사용한다. 
+
 ## Package Structure
 <hr>
 

@@ -17,7 +17,7 @@ public class BaseRestControllerAdvisor {
 
     @ExceptionHandler(InvalidRequestParameterException.class)
     public ContentBody<List<ErrorBindings>> handle(InvalidRequestParameterException e) {
-        LOG.warn("Invalid request parameters: {}", e);
+        LOG.error("유효하지 않은 요청입니다: {}", e);
         return new ContentBody<>(400, "Bad request.", "", e.getErrors());
     }
 
