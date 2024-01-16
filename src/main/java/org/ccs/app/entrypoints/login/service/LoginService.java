@@ -34,20 +34,10 @@ public class LoginService {
     }
 
     public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
-        UserAccount userAccount = getUserByEmail(loginRequest.getEmail());
+        UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
+        String jwt = tokenProvider.generateToken(account.getId());
+        String refreshToken = tokenProvider.generateRefreshToken(account.getId());
 
-        if (userAccount != null && userAccount.getPassword().equals(loginRequest.getPassword())) {
-            String jwt = tokenProvider.generateToken(userAccount.getId());
-            String refreshToken = tokenProvider.generateRefreshToken(userAccount.getId());
-
-            return new JwtAuthenticationResponse(jwt, refreshToken);
-        } else {
-            throw new IllegalArgumentException("Invalid email or password");
-        }
-    }
-
-    private UserAccount getUserByEmail(String email) {
-        return userAccountRepository.findByEmail(email)
-                .orElseThrow(NoSuchUserException::new);
+        return new JwtAuthenticationResponse(jwt, refreshToken);
     }
 }
