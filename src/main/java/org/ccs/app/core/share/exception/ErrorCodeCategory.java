@@ -1,4 +1,4 @@
-package org.ccs.app.core.share.domain;
+package org.ccs.app.core.share.exception;
 
 public enum ErrorCodeCategory {
 
