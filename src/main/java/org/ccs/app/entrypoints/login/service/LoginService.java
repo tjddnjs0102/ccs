@@ -1,12 +1,11 @@
 package org.ccs.app.entrypoints.login.service;
 
 import lombok.RequiredArgsConstructor;
-import org.ccs.app.core.security.JwtTokenProvider;
+import org.ccs.app.core.share.authenticate.token.JWTUtil;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.core.user.infra.repository.UserRepository;
 import org.ccs.app.entrypoints.login.model.JwtAuthenticationResponse;
 import org.ccs.app.entrypoints.login.model.LoginRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     private final UserRepository userRepository;
-    private final JwtTokenProvider tokenProvider;
+    private final JWTUtil tokenProvider;
 
     public String authenticate(LoginRequest loginRequest) {
         // 이메일을 기반으로 사용자 계정 조회
