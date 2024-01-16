@@ -44,8 +44,6 @@ logging:
 
 jwt:
   secret: ${jwt.secret}
-  token:
-    access:
-      expiration-ms: 3600000 # 1시간
-    refresh:
-      expiration-ms: 604800000 # 7일
+  expiration-ms:
+    access: 3600000 # 1시간
+    refresh: 604800000 # 7일
