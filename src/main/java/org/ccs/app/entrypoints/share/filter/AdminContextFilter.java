@@ -17,7 +17,7 @@ public class AdminContextFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        Authenticate authenticate = AuthenticateHolder.getLoginUser();
+        Authenticate authenticate = AuthenticateHolder.get();
 
         if (hasAdminRole(authenticate)) {
             chain.doFilter(request, response);
