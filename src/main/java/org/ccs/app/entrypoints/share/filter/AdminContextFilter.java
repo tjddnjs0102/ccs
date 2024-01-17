@@ -19,11 +19,11 @@ public class AdminContextFilter implements Filter {
 
         Authenticate authenticate = AuthenticateHolder.get();
 
-        if (hasAdminRole(authenticate)) {
-            chain.doFilter(request, response);
-        } else {
+        if (!hasAdminRole(authenticate)) {
             sendAccessDeniedResponse(response);
         }
+
+        chain.doFilter(request, response);
     }
 
     private boolean hasAdminRole(Authenticate authenticate) {
