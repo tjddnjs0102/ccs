@@ -14,16 +14,25 @@ import java.io.IOException;
 @Order(31)
 public class AdminContextFilter implements Filter {
 
-    Authenticate authenticate = AuthenticateHolder.getLoginUser();
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if (authenticate != null && authenticate.getRoles().contains(Role.ADMIN)) {
+
+        Authenticate authenticate = AuthenticateHolder.getLoginUser();
+
+        if (hasAdminRole(authenticate)) {
             chain.doFilter(request, response);
-        }else { // ADMIN 권한이 없는 경우
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN); // 403
-            httpResponse.getWriter().write("Access Denied: Insufficient Permissions");
+        } else {
+            sendAccessDeniedResponse(response);
         }
+    }
+
+    private boolean hasAdminRole(Authenticate authenticate) {
+        return authenticate != null && authenticate.getRoles().contains(Role.ADMIN);
+    }
+
+    private void sendAccessDeniedResponse(ServletResponse response) throws IOException {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        httpResponse.getWriter().write("Access Denied: Insufficient Permissions");
     }
 }
