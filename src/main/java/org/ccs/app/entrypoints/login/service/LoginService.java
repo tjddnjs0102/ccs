@@ -20,24 +20,28 @@ public class LoginService {
     private final LoginUsecase loginUsecase;
     private final JWTUtil jwtUtil;
 
+    public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
+        UserAccount account = loginUser(loginRequest);
+        String jwt = authenticate(loginRequest);
+        String refreshToken = createRefreshToken(account);
+
+        return new JwtAuthenticationResponse(jwt, refreshToken);
+    }
+
     public String authenticate(LoginRequest loginRequest) {
-        UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
+        UserAccount account = loginUser(loginRequest);
         log.debug("[authenticated] account: {}", account);
 
         return jwtUtil.generate(JWTType.ACCESS, account.getId());
     }
 
-    public String createRefreshToken(LoginRequest loginRequest) {
-        UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
+    public String createRefreshToken(UserAccount account) {
         log.debug("[refresh token created] account: {}", account);
         return jwtUtil.generate(JWTType.REFRESH, account.getId());
     }
 
-    public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
-        UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
-        String jwt = jwtUtil.generate(JWTType.ACCESS, account.getId());
-        String refreshToken = jwtUtil.generate(JWTType.REFRESH, account.getId());
 
-        return new JwtAuthenticationResponse(jwt, refreshToken);
+    private UserAccount loginUser(LoginRequest loginRequest) {
+        return loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
     }
 }
