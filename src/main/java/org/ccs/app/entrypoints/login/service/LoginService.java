@@ -20,6 +20,7 @@ public class LoginService {
     private final LoginUsecase loginUsecase;
     private final JWTUtil jwtUtil;
 
+
     public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
         UserAccount account = loginUser(loginRequest);
         String jwt = authenticate(loginRequest);

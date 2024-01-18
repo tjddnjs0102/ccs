@@ -2,25 +2,19 @@ package org.ccs.app.entrypoints.share.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import org.slf4j.MDC;
 import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
-import java.util.UUID;
 
-@WebFilter("/*")
-@Order(Integer.MIN_VALUE)
-public class MDCFilter implements Filter {
+@WebFilter("/api/*")
+@Order(32)
+public class ApiContextFilter implements Filter {
+
+    // TODO: 로직을 작성하세요.
+    // 힌트 : threadlocal 에 담겨있는 authenticated 를 확인해서 처리할 수 있습니다.
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        final UUID uuid = UUID.randomUUID();
-        MDC.put("traceId", uuid.toString());
-
-        try {
-            chain.doFilter(request, response);
-        } finally {
-            MDC.clear();
-        }
+        chain.doFilter(request, response);
     }
 }
