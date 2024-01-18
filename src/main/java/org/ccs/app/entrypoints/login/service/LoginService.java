@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-// TODO: 혹시나 불필요한 부분이 있다면 제거해주세요. 개선할 수 있는 내용이 있다면 변경해도 좋습니다.!!
 
 @RequiredArgsConstructor
 @Service
@@ -28,18 +27,16 @@ public class LoginService {
         return jwtUtil.generate(JWTType.ACCESS, account.getId());
     }
 
-    // TODO: JWTUtil을 활용해서 코드를 수정하세요.
     public String createRefreshToken(LoginRequest loginRequest) {
         UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
         log.debug("[refresh token created] account: {}", account);
-        return jwtUtil.generateRefreshToken(account.getId());
+        return jwtUtil.generate(JWTType.REFRESH, account.getId());
     }
 
-    // TODO: JWTUtil을 활용해서 코드를 수정하세요.
     public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
         UserAccount account = loginUsecase.login(loginRequest.getEmail(), loginRequest.getPassword());
-        String jwt = jwtUtil.generateToken(account.getId());
-        String refreshToken = jwtUtil.generateRefreshToken(account.getId());
+        String jwt = jwtUtil.generate(JWTType.ACCESS, account.getId());
+        String refreshToken = jwtUtil.generate(JWTType.REFRESH, account.getId());
 
         return new JwtAuthenticationResponse(jwt, refreshToken);
     }
