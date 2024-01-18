@@ -7,7 +7,7 @@ public class AuthenticateHolder {
         authenticateHolder.set(authenticate);
     }
 
-    public static Authenticate getLoginUser() {
+    public static Authenticate get() {
         return authenticateHolder.get();
     }
 
