@@ -3,6 +3,7 @@ package org.ccs.app.entrypoints.login.service;
 import lombok.RequiredArgsConstructor;
 import org.ccs.app.core.share.authenticate.token.JWTType;
 import org.ccs.app.core.share.authenticate.token.JWTUtil;
+import org.ccs.app.core.share.exception.auth.NoSuchUserException;
 import org.ccs.app.core.user.application.usecase.LoginUsecase;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.entrypoints.login.model.JwtAuthenticationResponse;
@@ -16,27 +17,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
     private final Logger log = LoggerFactory.getLogger(LoginService.class);
-
     private final LoginUsecase loginUsecase;
     private final JWTUtil jwtUtil;
 
-    public JwtAuthenticationResponse authenticateAndCreateTokens(LoginRequest loginRequest) {
+    public JwtAuthenticationResponse authenticate(LoginRequest loginRequest) {
         UserAccount account = loginUser(loginRequest);
-        String jwt = authenticate(loginRequest);
+
+        if (account == null) {
+            throw new NoSuchUserException();
+        }
+
+        String jwt = createAccessToken(account);
         String refreshToken = createRefreshToken(account);
 
         return new JwtAuthenticationResponse(jwt, refreshToken);
     }
 
-    public String authenticate(LoginRequest loginRequest) {
-        UserAccount account = loginUser(loginRequest);
-        log.debug("[authenticated] account: {}", account);
+    public String createAccessToken(UserAccount account) {
+        log.debug("[access token created] account: {}", account);
 
         return jwtUtil.generate(JWTType.ACCESS, account.getId());
     }
 
     public String createRefreshToken(UserAccount account) {
         log.debug("[refresh token created] account: {}", account);
+
         return jwtUtil.generate(JWTType.REFRESH, account.getId());
     }
 
