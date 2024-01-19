@@ -22,11 +22,6 @@ public class LoginService {
 
     public JwtAuthenticationResponse authenticate(LoginRequest loginRequest) {
         UserAccount account = loginUser(loginRequest);
-
-        if (account == null) {
-            throw new NoSuchUserException();
-        }
-
         String jwt = createAccessToken(account);
         String refreshToken = createRefreshToken(account);
 
