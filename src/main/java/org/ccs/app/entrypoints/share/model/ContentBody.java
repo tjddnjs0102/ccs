@@ -1,20 +1,21 @@
 package org.ccs.app.entrypoints.share.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.ToString;
 
-//TODO: record 로 전환하기
-@Getter @ToString
-public class ContentBody<T> {
-    private final int code;
-    private final String message;
-    private final String traceId;
-    private final T contents;
+import java.io.IOException;
 
-    public ContentBody(int code, String message, String traceId, T contents) {
-        this.code = code;
-        this.message = message;
-        this.traceId = traceId;
-        this.contents = contents;
+@Getter
+@ToString
+public record ContentBody<T>(int code, String message, String traceId, T contents) {
+
+    public static <T> String serialize(ContentBody<T> contentBody) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Include non-null values only in the serialized output
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        return objectMapper.writeValueAsString(contentBody);
     }
 }
