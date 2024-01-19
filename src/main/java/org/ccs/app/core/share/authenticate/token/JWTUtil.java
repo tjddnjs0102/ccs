@@ -21,10 +21,10 @@ public class JWTUtil {
         Date expiryDate = new Date(now.getTime() + 3600);
 
         return Jwts.builder()
-                .setSubject(Long.toString(userId))
+                .setSubject(Long.toString(userId)) // 토큰 subject를 사용자 ID로 설정
                 .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .setExpiration(expiryDate) // 만료시간 1시간
+                .signWith(SignatureAlgorithm.HS512, jwtSecret) // 토큰 서명
                 .compact();
     }
 
