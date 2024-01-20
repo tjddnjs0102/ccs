@@ -1,17 +1,19 @@
 package org.ccs.app.core.budget.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.ccs.app.core.share.model.QueryParameter;
-import org.springframework.data.domain.Sort;
+import org.ccs.app.core.budget.domain.ReceiptStatus;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.Set;
 
 @Getter @ToString
-public class QueryReceiptParameter extends QueryParameter {
-
-    private Long requester;
-
-    public QueryReceiptParameter(Sort sort, int pageNumber, int pageSize, Long requester) {
-        super(sort, pageNumber, pageSize);
-        this.requester = requester;
-    }
+@Builder
+@AllArgsConstructor
+public class QueryReceiptParameter {
+    private PageRequest pageRequest;
+    private Set<Long> requesterSet;
+    private Set<ReceiptStatus> statusSet;
 }
