@@ -7,8 +7,6 @@ import lombok.ToString;
 
 import java.io.IOException;
 
-@Getter
-@ToString
 public record ContentBody<T>(int code, String message, String traceId, T contents) {
 
     public static <T> String serialize(ContentBody<T> contentBody) throws IOException {
