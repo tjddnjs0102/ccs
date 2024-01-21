@@ -22,7 +22,7 @@ public class ApiContextFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         Authenticate authenticate = AuthenticateHolder.get();
 
-        if (authenticate == null) {
+        if (!authenticate.isAuthenticated()) { // authenticated 필드가 false인 경우
             sendUnauthenticatedResponse(response);
             return;
         }
