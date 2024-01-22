@@ -39,7 +39,7 @@ public class ApiContextFilter implements Filter {
                 null);
 
         httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        httpResponse.setContentType("application/json");
+        httpResponse.setContentType("application/json;charset=UTF-8");
         httpResponse.getWriter().write(mapper.writeValueAsString(unauthenticatedBody));
     }
 }
