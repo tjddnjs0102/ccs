@@ -1,5 +1,6 @@
 package org.ccs.app.entrypoints.share.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,8 +41,10 @@ public class AdminContextFilter implements Filter {
                 "",
                 null);
 
-        String serializedBody = ContentBody.serialize(accessDeniedBody);
+        ObjectMapper mapper = new ObjectMapper();
+
+        // String serializedBody = ContentBody.serialize(accessDeniedBody);
         httpResponse.setContentType("application/json");
-        httpResponse.getWriter().write(serializedBody);
+        httpResponse.getWriter().write(mapper.writeValueAsString(accessDeniedBody));
     }
 }
