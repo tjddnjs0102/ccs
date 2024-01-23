@@ -6,12 +6,15 @@ import org.ccs.app.core.budget.domain.Bank;
 import org.ccs.app.core.budget.domain.BankCode;
 import org.ccs.app.core.budget.domain.Receipt;
 import org.ccs.app.core.budget.domain.ReceiptItem;
+import org.ccs.app.core.budget.model.QueryReceiptParameter;
 import org.ccs.app.core.budget.model.QueryReceiptResult;
 import org.ccs.app.core.share.AbstractRepositoryTest;
 import org.ccs.app.core.user.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,7 +32,7 @@ class ReceiptRepositoryTest extends AbstractRepositoryTest {
     ReceiptRepository receiptRepository;
 
     @Test
-    void test_search() {
+    void queryTest() {
         // given
         User user = User.builder()
                 .name("테스트")
@@ -66,7 +69,10 @@ class ReceiptRepositoryTest extends AbstractRepositoryTest {
         em.clear();
 
         // when
-        List<QueryReceiptResult> results = receiptRepository.search();
+        QueryReceiptParameter parameter = QueryReceiptParameter.builder()
+                .pageRequest(PageRequest.of(0, 10, Sort.by(Sort.Order.desc("id"))))
+                .build();
+        List<QueryReceiptResult> results = receiptRepository.query(parameter);
 
         // then
         assertAll(
