@@ -18,7 +18,7 @@ public class JWTUtil {
 
     public String generate(JWTType type, Long userId) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + 3600);
+        Date expiryDate = new Date(now.getTime() + type.getExpirationMs());
 
         return Jwts.builder()
                 .setSubject(Long.toString(userId)) // 토큰 subject를 사용자 ID로 설정

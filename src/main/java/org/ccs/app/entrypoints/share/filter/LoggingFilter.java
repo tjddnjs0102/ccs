@@ -1,13 +1,11 @@
 package org.ccs.app.entrypoints.share.filter;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletResponseWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.util.StreamUtils;
 
 import java.io.CharArrayWriter;
@@ -16,8 +14,6 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
 
-@WebFilter("/*")
-@Order(10)
 public class LoggingFilter implements Filter {
     private static final Logger log = LoggerFactory.getLogger(LoggingFilter.class);
 
@@ -26,14 +22,15 @@ public class LoggingFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        // FIXME: request param 값 찍어보세요. HttpServletRequest 구조 공부와 함께요.
         log.info("Request method: {}, URL: {}, headers: [{}], params: [{}], Body: {}",
-                httpRequest.getMethod(), httpRequest.getMethod(), this.getHeaderAsString(httpRequest), this.getRequestBody(httpRequest));
+                httpRequest.getMethod(), httpRequest.getRequestURI(), this.getHeaderAsString(httpRequest), "", this.getRequestBody(httpRequest));
 
         CharResponseWrapper responseWrapper = new CharResponseWrapper(httpResponse);
 
         chain.doFilter(request, response);
 
-        log.info("Response headers: [{}], Body: {}", this.getHeaderAsString(httpResponse), responseWrapper.toString());
+        //log.info("Response headers: [{}], Body: {}", this.getHeaderAsString(httpResponse), responseWrapper.toString());
     }
 
     private String getHeaderAsString(HttpServletRequest request) {
