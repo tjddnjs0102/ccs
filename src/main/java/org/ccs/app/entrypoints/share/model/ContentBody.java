@@ -2,8 +2,6 @@ package org.ccs.app.entrypoints.share.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
-import lombok.ToString;
 
 import java.io.IOException;
 
