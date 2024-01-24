@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
 public class ApiContextFilter implements Filter {
 
     private static final ObjectMapper mapper = new ObjectMapper();
