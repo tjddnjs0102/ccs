@@ -4,13 +4,12 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Getter @ToString
-public class SliceBody<T> {
+public class SliceBody<T> extends ContentBody<T> {
 
-    private final ContentBody<T> contentBody;
     private final Boolean next;
 
     public SliceBody(int code, String message, String traceId, T contents, Boolean next) {
-        this.contentBody = new ContentBody<>(code, message, traceId, contents);
+        super(code, message, traceId, contents);
         this.next = next;
     }
 
