@@ -12,8 +12,6 @@ import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
 
-@WebFilter("/admin/*")
-@Order(31)
 public class AdminContextFilter implements Filter {
 
     @Override

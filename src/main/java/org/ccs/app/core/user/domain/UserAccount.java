@@ -18,7 +18,8 @@ import java.util.Objects;
 @Table(name = "ccs_user_account")
 @DynamicUpdate
 @DynamicInsert
-@Getter @ToString
+@Getter
+@ToString(exclude = "roles")
 public class UserAccount extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,7 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "password")
     private String password; // login pw
 
-    @OneToMany
+    @OneToMany(mappedBy = "account")
     private List<UserRole> roles;
 
     @Column(name = "login_failure_count")

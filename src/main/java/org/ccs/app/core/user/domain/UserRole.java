@@ -16,7 +16,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @Getter
-@ToString
+@ToString(exclude = "account")
 public class UserRole extends BaseCreatedAndUpdatedDateTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
