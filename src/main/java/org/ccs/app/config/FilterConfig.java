@@ -54,7 +54,7 @@ public class FilterConfig {
     public FilterRegistrationBean<ApiContextFilter> apiContextFilter() {
         FilterRegistrationBean<ApiContextFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new ApiContextFilter());
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.addUrlPatterns("/api");
         registrationBean.setOrder(21);
         return registrationBean;
     }
@@ -63,7 +63,7 @@ public class FilterConfig {
     public FilterRegistrationBean<AdminContextFilter> adminContextFilter() {
         FilterRegistrationBean<AdminContextFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new AdminContextFilter());
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.addUrlPatterns("/admin");
         registrationBean.setOrder(22);
         return registrationBean;
     }
