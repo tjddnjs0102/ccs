@@ -38,14 +38,19 @@ public class JWTFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
+        log.info("me");
+
         String token = httpServletRequest.getHeader(AUTHORIZATION);
         log.debug("[authorization] {}", token);
 
-        boolean result = this.setAuthenticate(token, exclusionRequestPath(httpServletRequest));
-
-        if (!result) {
-            // TODO: 여기에선 BusinessException 을 던지면 안됩니다. 이 부분을 구현해주세요.
-            throw new BusinessException();
+        if (Objects.isNull(token) && exclusionRequestPath(httpServletRequest)) {
+            AuthenticateHolder.setAuthenticate(new Authenticate());
+        } else {
+            boolean result = this.setAuthenticate(token);
+            if (!result) {
+                // TODO: 여기에선 BusinessException 을 던지면 안됩니다. 이 부분을 구현해주세요.
+                throw new BusinessException();
+            }
         }
 
         chain.doFilter(request, response);
@@ -53,8 +58,10 @@ public class JWTFilter implements Filter {
     }
 
     private boolean exclusionRequestPath(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+        log.info("uri : " + uri);
         return Arrays.stream(exclude)
-                .anyMatch(it -> request.getRequestURI().startsWith(it));
+                .anyMatch(it -> uri.startsWith(it));
     }
 
     /**
@@ -63,15 +70,9 @@ public class JWTFilter implements Filter {
      * 인증에 제외 될 path 이나 토큰이 존재 한다면 토큰에 대한 검증을 한다.
      * 인증에 제외 된 path 가 아닌데 토큰이 없다면 인증에 실패한다.
      * @param token
-     * @param excluded : 인증에 제외 된 요청여부 (true - 제외, false - 인증대상)
      * @return
      */
-    private boolean setAuthenticate(String token, boolean excluded) {
-        if (excluded && Objects.isNull(token)) {
-            AuthenticateHolder.setAuthenticate(new Authenticate());
-            return true;
-        }
-
+    private boolean setAuthenticate(String token) {
         if (Objects.isNull(token))
             return false;
 
