@@ -27,4 +27,8 @@
         <appender-ref ref="APPLOG"/>
     </logger>
 
+    <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
 </configuration>
