@@ -2,8 +2,8 @@ package org.ccs.app.core.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.ccs.app.core.share.authenticate.exception.IncorrectPasswordException;
 import org.ccs.app.core.share.domain.BaseCreatedAndUpdatedDateTime;
-import org.ccs.app.core.share.exception.auth.PasswordNotMatchException;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -53,7 +53,7 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
             if (loginFailureCount > 5) {
                 this.status = AccountStatus.LOCKED;
             }
-            throw new PasswordNotMatchException();
+            throw new IncorrectPasswordException();
         }
 
         this.lastAccessAt = LocalDateTime.now();

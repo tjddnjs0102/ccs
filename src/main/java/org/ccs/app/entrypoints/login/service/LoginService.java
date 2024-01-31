@@ -3,7 +3,6 @@ package org.ccs.app.entrypoints.login.service;
 import lombok.RequiredArgsConstructor;
 import org.ccs.app.core.share.authenticate.token.JWTType;
 import org.ccs.app.core.share.authenticate.token.JWTUtil;
-import org.ccs.app.core.share.exception.auth.NoSuchUserException;
 import org.ccs.app.core.user.application.usecase.LoginUsecase;
 import org.ccs.app.core.user.domain.UserAccount;
 import org.ccs.app.entrypoints.login.model.JwtAuthenticationResponse;

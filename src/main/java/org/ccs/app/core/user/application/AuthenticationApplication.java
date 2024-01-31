@@ -1,8 +1,8 @@
 package org.ccs.app.core.user.application;
 
 import lombok.RequiredArgsConstructor;
-import org.ccs.app.core.share.exception.auth.NoSuchUserException;
-import org.ccs.app.core.share.exception.auth.PasswordNotMatchException;
+import org.ccs.app.core.share.authenticate.exception.IncorrectPasswordException;
+import org.ccs.app.core.share.authenticate.exception.NoSuchUserException;
 import org.ccs.app.core.user.application.usecase.LoginUsecase;
 import org.ccs.app.core.user.application.usecase.LogoutUsecase;
 import org.ccs.app.core.user.domain.UserAccount;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthenticationApplication implements LoginUsecase, LogoutUsecase {
     private final UserAccountRepository userAccountRepository;
 
-    @Transactional(noRollbackFor = PasswordNotMatchException.class) // 엄청중요함!! 이것이 어떤 역할인지 공부하세요!!
+    @Transactional(noRollbackFor = IncorrectPasswordException.class) // 엄청중요함!! 이것이 어떤 역할인지 공부하세요!!
     @Override
     public UserAccount login(String id, String password) {
         UserAccount account = getUserByEmail(id);
