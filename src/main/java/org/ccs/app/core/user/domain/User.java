@@ -65,5 +65,8 @@ public class User extends BaseCreatedAndUpdatedDateTime {
 
     @Column(name = "reason")
     private String reason;
+
+    @OneToOne(mappedBy = "user")
+    private UserAccount userAccount;
 }
 

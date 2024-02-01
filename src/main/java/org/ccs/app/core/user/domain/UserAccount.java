@@ -31,9 +31,6 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
     @Column(name = "password")
     private String password; // login pw
 
-    @OneToMany(mappedBy = "account")
-    private List<UserRole> roles;
-
     @Column(name = "login_failure_count")
     private Integer loginFailureCount;
 
@@ -45,6 +42,13 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
 
     @Column(name = "password_changed_dt")
     private LocalDateTime passwordChangedAt;
+
+    @OneToMany(mappedBy = "account")
+    private List<UserRole> roles;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public void confirmPassword(String password) {
         if (!Objects.equals(this.password, password)) {
