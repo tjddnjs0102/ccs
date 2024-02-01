@@ -6,11 +6,12 @@ import org.ccs.app.entrypoints.useraccount.service.UserAccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -32,7 +33,7 @@ public class UserAccountController {
     }
 
     @PostMapping("/public/account/signup")
-    public String signup(UserAccountRequest userAccountRequest, BindingResult bindingResult) {
+    public String signup(@Validated @RequestBody UserAccountRequest userAccountRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/public/account/signupForm";
         }
