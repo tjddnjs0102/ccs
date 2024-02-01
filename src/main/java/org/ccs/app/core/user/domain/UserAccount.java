@@ -46,7 +46,7 @@ public class UserAccount extends BaseCreatedAndUpdatedDateTime {
     @OneToMany(mappedBy = "account")
     private List<UserRole> roles;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
