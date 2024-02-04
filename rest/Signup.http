@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/public/account/signup
+Content-Type: application/json
+
+{
+  "username": "테스트",
+  "email": "test@naver.com",
+  "password": "12341234",
+  "phoneNumber": "01011112222",
+  "parish": 1,
+  "cellGroup": 15,
+  "gender": "MALE",
+  "zipcode": "12345",
+  "address": "경기도 평택시 테스트 11길 3, 1004호"
+}
