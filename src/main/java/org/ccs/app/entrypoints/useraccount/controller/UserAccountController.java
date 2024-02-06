@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -22,24 +23,30 @@ public class UserAccountController {
     private static final Logger logger = LoggerFactory.getLogger(UserAccountController.class);
 
     @GetMapping("/")
-    public String index() {
-        return "/home/index"; // 홈페이지 경로 임의로 적어두었습니다. 확인 후 수정 필요
+    public String index(Model model) {
+        if (model.containsAttribute("signupSuccess")) {
+            model.addAttribute("message", model.asMap().get("signupSuccess"));
+        }
+        return "/index";
     }
 
     @GetMapping("/public/account/signup")
     public String signupForm(Model model) {
-        model.addAttribute("userAccount", new UserAccountRequest());
-        return "/public/account/signupForm";
+//        model.addAttribute("userAccount", new UserAccountRequest());
+//        return "/public/account/signupForm";
+        return "under-construction"; // 준비중 페이지로 매핑
     }
 
     @PostMapping("/public/account/signup")
-    public String signup(@Validated @RequestBody UserAccountRequest userAccountRequest, BindingResult bindingResult) {
+    public String signup(@Validated @RequestBody UserAccountRequest userAccountRequest, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "/public/account/signupForm";
         }
 
         userAccountService.signup(userAccountRequest);
         logger.info("회원가입 성공: {}", userAccountRequest.getUsername());
+        redirectAttributes.addFlashAttribute("signupSuccess", "회원가입이 성공적으로 완료되었습니다.");
         return "redirect:/";
     }
 }
