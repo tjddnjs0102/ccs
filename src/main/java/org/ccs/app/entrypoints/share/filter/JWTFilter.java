@@ -20,7 +20,7 @@ import java.util.Objects;
 public class JWTFilter implements Filter {
     private static final Logger log = LoggerFactory.getLogger(JWTFilter.class);
     private static final String AUTHORIZATION = "Authorization";
-    private static final String[] exclude = {"/login", "/public"};
+    private static final String[] exclude = {"/login", "/public", "/"};
 
     private JWTUtil jwtUtil;
     private UserAccountRepository userAccountRepository;

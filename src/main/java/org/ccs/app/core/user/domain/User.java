@@ -18,7 +18,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "ccs_user")
 @DynamicInsert
 @DynamicUpdate
-@Getter @ToString
+@Getter
+@ToString(exclude = "userAccount")
 @Builder
 public class User extends BaseCreatedAndUpdatedDateTime {
     @Id
@@ -65,5 +66,8 @@ public class User extends BaseCreatedAndUpdatedDateTime {
 
     @Column(name = "reason")
     private String reason;
+
+    @OneToOne(mappedBy = "user")
+    private UserAccount userAccount;
 }
 
