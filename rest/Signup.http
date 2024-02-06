@@ -3,8 +3,8 @@ POST http://localhost:8080/public/account/signup
 Content-Type: application/json
 
 {
-  "username": "테스트",
-  "email": "test@naver.com",
+  "username": "테스트22",
+  "email": "test22@naver.com",
   "password": "12341234",
   "phoneNumber": "01011112222",
   "parish": 1,
